@@ -7,4 +7,4 @@
 - [지원](https://kim-jong-seong.github.io/sannabi/)
 - [개인정보처리방침](https://kim-jong-seong.github.io/sannabi/privacy.html)
 
-문서는 `docs/` 에 있고, GitHub Pages 로 배포됩니다.
+문서는 저장소 뿌리에 있고, GitHub Pages 로 배포됩니다.
