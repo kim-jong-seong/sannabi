@@ -1,31 +1,238 @@
-/* 산나비 문서 — 앱과 같은 결로. 잎 초록에서 물빛으로. */
+/* 산나비 웹 문서
+ *
+ * 앱과 같은 결로 간다 — 흰 바탕, 넉넉한 여백, 잎 초록에서 물빛으로 흐르는 강조색.
+ * 산에서 쓰는 앱이니 문서도 한눈에 읽히는 것이 먼저다. 장식은 최소로 둔다.
+ */
+
 :root {
-  --ink: #1d2320;
-  --dim: #5f6b63;
-  --line: #e3e8e4;
-  --bg: #ffffff;
-  --accent: #3f9f6f;
+  --ink:      #161c19;   /* 본문 */
+  --ink-soft: #55625b;   /* 부연 */
+  --line:     #e4eae6;
+  --bg:       #ffffff;
+  --bg-soft:  #f5f8f6;
+  --leaf:     #2f9464;
+  --water:    #2a8fbe;
+  --measure:  38rem;
 }
+
 @media (prefers-color-scheme: dark) {
-  :root { --ink:#e9efea; --dim:#9aa8a0; --line:#2a322d; --bg:#141815; --accent:#5cc18c; }
+  :root {
+    --ink:      #e8eeea;
+    --ink-soft: #9fada5;
+    --line:     #262e29;
+    --bg:       #101412;
+    --bg-soft:  #171d1a;
+    --leaf:     #5cc68d;
+    --water:    #5ab6e0;
+  }
 }
+
 * { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
 body {
-  margin: 0; padding: 0 24px 96px;
-  background: var(--bg); color: var(--ink);
-  font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard",
+               "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+  /* 한글은 단어 중간에서 끊기면 읽기 나쁘다 */
   word-break: keep-all;
+  overflow-wrap: break-word;
 }
-main { max-width: 42rem; margin: 0 auto; }
-header { padding: 72px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
-h1 { margin: 0 0 8px; font-size: 1.9rem; letter-spacing: -0.02em; }
-header p { margin: 0; color: var(--dim); font-size: 0.95rem; }
-h2 { margin: 44px 0 12px; font-size: 1.15rem; letter-spacing: -0.01em; }
-p, li { color: var(--ink); }
-ul { padding-left: 1.1rem; }
-li { margin: 6px 0; }
-a { color: var(--accent); }
-.note { color: var(--dim); font-size: 0.93rem; }
-.card { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 16px 0; }
-footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--dim); font-size: 0.88rem; }
-footer a { margin-right: 14px; }
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* ── 머리말 ─────────────────────────────── */
+
+.top {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.top .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+}
+
+.brand {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  background: linear-gradient(120deg, var(--leaf), var(--water));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+nav { display: flex; gap: 6px; }
+
+nav a {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 5px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+nav a:hover { background: var(--bg-soft); color: var(--ink); }
+
+/* 지금 보고 있는 쪽 */
+nav a[aria-current="page"] {
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── 제목 ──────────────────────────────── */
+
+header.page { padding: 56px 0 8px; }
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.lede {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+}
+
+.stamp {
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── 본문 ──────────────────────────────── */
+
+main { padding-bottom: 88px; }
+
+h2 {
+  margin: 52px 0 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 1.18rem;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+/* 묻고 답하는 꼭지. 질문이 답보다 또렷해야 훑어볼 수 있다. */
+h3 {
+  margin: 30px 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h3::before {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin-bottom: 12px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--leaf), var(--water));
+}
+
+p { margin: 0 0 14px; }
+
+ul { margin: 0 0 16px; padding-left: 0; list-style: none; }
+
+li {
+  position: relative;
+  margin: 10px 0;
+  padding-left: 18px;
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.82em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+b, strong { font-weight: 600; }
+
+a { color: var(--water); text-underline-offset: 3px; }
+
+.soft { color: var(--ink-soft); font-size: 0.92rem; }
+
+/* 꼭 짚고 넘어가야 할 한 문단 */
+.callout {
+  margin: 28px 0;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+}
+
+.callout p:last-child { margin-bottom: 0; }
+
+/* 누르러 가는 자리 */
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--leaf), var(--water));
+  color: #fff;
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.action:hover { opacity: 0.9; }
+
+/* ── 꼬리말 ─────────────────────────────── */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 26px 0 60px;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+}
+
+footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+footer a { color: var(--ink-soft); margin-right: 14px; }
+
+/* ── 좁은 화면 ──────────────────────────── */
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  header.page { padding-top: 40px; }
+  h1 { font-size: 1.65rem; }
+  h2 { margin-top: 42px; }
+  .top .wrap { min-height: 54px; }
+  nav a { padding: 5px 9px; font-size: 0.82rem; }
+}
